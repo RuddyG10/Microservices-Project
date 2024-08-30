@@ -1,10 +1,12 @@
 package com.bankapp.accounts.service.impl;
 
 import com.bankapp.accounts.constants.AccountsConstants;
+import com.bankapp.accounts.dto.AccountsDto;
 import com.bankapp.accounts.dto.CustomerDto;
 import com.bankapp.accounts.entity.Accounts;
 import com.bankapp.accounts.entity.Customer;
 import com.bankapp.accounts.exception.CustomerAlreadyExistsException;
+import com.bankapp.accounts.exception.ResouceNotFoundException;
 import com.bankapp.accounts.mapper.AccountsMapper;
 import com.bankapp.accounts.mapper.CustomerMapper;
 import com.bankapp.accounts.repository.AccountsRepository;
@@ -38,6 +40,26 @@ public class AccountsServiceImpl implements IAccountsService {
         customer.setCreatedBy("Ruddy");
         Customer savedCustomer = customerRepository.save(customer);
         accountsRepository.save(createNewAccount(savedCustomer));
+    }
+
+    /**
+     * @param mobileNumber
+     * @return Accounts Details based on a given mobile number
+     */
+    @Override
+    public CustomerDto fetchAccount(String mobileNumber) {
+
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResouceNotFoundException("Customer","mobileNumber",mobileNumber)
+        );
+        Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId()).orElseThrow(
+                () -> new ResouceNotFoundException("Account","customerId",customer.getCustomerId().toString())
+        );
+
+        CustomerDto customerDto = CustomerMapper.mapToCustomerDto(customer,new CustomerDto());
+        customerDto.setAccountsDto(AccountsMapper.mapToAccountsDto(accounts,new AccountsDto()));
+
+        return customerDto;
     }
 
     /**
