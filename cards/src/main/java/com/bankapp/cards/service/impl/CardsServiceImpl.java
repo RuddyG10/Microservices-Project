@@ -2,6 +2,7 @@ package com.bankapp.cards.service.impl;
 
 import com.bankapp.cards.dto.CardsDto;
 import com.bankapp.cards.entity.Cards;
+import com.bankapp.cards.exception.CardAlreadyExistsException;
 import com.bankapp.cards.mapper.CardsMapper;
 import com.bankapp.cards.repository.CardsRepository;
 import com.bankapp.cards.service.ICardsService;
@@ -25,7 +26,7 @@ public class CardsServiceImpl implements ICardsService {
         Cards cards = CardsMapper.mapToCards(cardsDto,new Cards());
         Optional<Cards> optionalCards = cardsRepository.findByCardNumber(cardsDto.getCardNumber());
         if (optionalCards.isPresent()){
-            //TODO Error throwing logic
+            throw new CardAlreadyExistsException("Card already registered with given Card Number"+cardsDto.getCardNumber());
         }
         Cards savedCards = cardsRepository.save(cards);
     }
