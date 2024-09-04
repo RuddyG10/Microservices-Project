@@ -35,12 +35,8 @@ public class CardsServiceImpl implements ICardsService {
         Cards savedCards = cardsRepository.save(createNewCard(mobileNumber));
     }
 
-    /**
-     * @param mobileNumber
-     * @return nuew card for a user
-     */
-    @Override
-    public Cards createNewCard(String mobileNumber) {
+
+    private Cards createNewCard(String mobileNumber) {
         Cards newCard = new Cards();
         long randomCardNumber = 100000000000L + new Random().nextInt(900000000);
         newCard.setCardNumber(Long.toString(randomCardNumber));

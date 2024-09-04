@@ -15,12 +15,6 @@ public interface ICardsService {
 
     /**
      *
-     * @param mobileNumber
-     * @return nuew card for a user
-     */
-    Cards createNewCard(String mobileNumber);
-    /**
-     *
      * @param cardNumber
      * @return card details
      */
