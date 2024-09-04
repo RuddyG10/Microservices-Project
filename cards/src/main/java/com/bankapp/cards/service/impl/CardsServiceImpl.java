@@ -11,7 +11,6 @@ import com.bankapp.cards.service.ICardsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.smartcardio.Card;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +30,7 @@ public class CardsServiceImpl implements ICardsService {
     public void createCard(String mobileNumber) {
         Optional<Cards> optionalCards = cardsRepository.findByMobileNumber(mobileNumber);
         if (optionalCards.isPresent()){
-            throw new CardAlreadyExistsException("Card already registered with given Card Number"+cardsDto.getCardNumber());
+            throw new CardAlreadyExistsException("Card already registered with given Mobile Number "+mobileNumber);
         }
         Cards savedCards = cardsRepository.save(createNewCard(mobileNumber));
     }
