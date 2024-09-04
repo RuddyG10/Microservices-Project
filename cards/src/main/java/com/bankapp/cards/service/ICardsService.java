@@ -1,16 +1,24 @@
 package com.bankapp.cards.service;
 
 import com.bankapp.cards.dto.CardsDto;
+import com.bankapp.cards.entity.Cards;
 
 import java.util.List;
 
 public interface ICardsService {
+
     /**
      *
-     * @param cardsDto to create a card
+     * @param mobileNumber of the user to create one card
      */
-    void createCard(CardsDto cardsDto);
+    void createCard(String mobileNumber);
 
+    /**
+     *
+     * @param mobileNumber
+     * @return nuew card for a user
+     */
+    Cards createNewCard(String mobileNumber);
     /**
      *
      * @param cardNumber
