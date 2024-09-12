@@ -83,7 +83,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <image>
-                        <name>ruddyg10/${project.artifactId}:v1</name>
+                        <name>ruddyg31/${project.artifactId}:v1</name>
                     </image>
                     <excludes>
                         <exclude>

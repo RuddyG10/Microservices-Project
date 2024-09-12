@@ -84,7 +84,7 @@
                 <version>3.4.2</version>
                 <configuration>
                     <to>
-                        <image>ruddyg10/${project.artifactId}:v1</image>
+                        <image>ruddyg31/${project.artifactId}:v1</image>
                     </to>
                 </configuration>
             </plugin>
